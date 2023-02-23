@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     private float speed = 10.0f;
     private Rigidbody2D playerRb;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerRb = GetComponent<Rigidbody2D>();
         playerRb = GetComponent<Rigidbody2D>();
     }
 
@@ -17,8 +19,14 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+
        
         playerRb.AddForce(Vector3.forward * speed * verticalInput);
         playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+          playerRb.AddForce(Vector3.up * 10, ForceMode2D.Impulse);
+        }
     }
 }
